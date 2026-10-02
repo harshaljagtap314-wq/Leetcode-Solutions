@@ -11,33 +11,73 @@
 class Solution {
 public:
     ListNode* oddEvenList(ListNode* head) {
-        ListNode*temp=head;
 
-        vector<int> arr;
 
-        while(temp!=NULL){
-            arr.push_back(temp->val);
-            temp=temp->next;
+        // brute force appraoch
+
+
+        // ListNode*temp=head;
+
+        // vector<int> arr;
+
+        // while(temp!=NULL){
+        //     arr.push_back(temp->val);
+        //     temp=temp->next;
+        // }
+
+        // vector<int> result;
+
+        // for(int i=0;i<arr.size();i+=2){
+        //     result.push_back(arr[i]);
+        // }
+
+        // for(int i=1;i<arr.size();i+=2){
+        //     result.push_back(arr[i]);
+        // }
+
+        // temp=head;
+
+        // for(int i=0;i<result.size();i++){
+        //     temp->val=result[i];
+        //     temp=temp->next;
+        // }
+
+        // return head;
+
+
+
+        // optimal solution 
+
+        if(head ==NULL ){
+            return NULL;
         }
 
-        vector<int> result;
-
-        for(int i=0;i<arr.size();i+=2){
-            result.push_back(arr[i]);
+        if(head->next == NULL){
+            return head;
         }
 
-        for(int i=1;i<arr.size();i+=2){
-            result.push_back(arr[i]);
+        ListNode* oddptr=head;
+        ListNode*evenptr=head->next;
+        ListNode* evenhead=head->next;
+
+
+
+
+
+        while(evenptr != NULL && evenptr->next!=NULL){
+            oddptr->next=oddptr->next->next;
+            evenptr->next=evenptr->next->next;
+
+            oddptr=oddptr->next;
+            evenptr=evenptr->next;
         }
 
-        temp=head;
+        oddptr->next=evenhead;
 
-        for(int i=0;i<result.size();i++){
-            temp->val=result[i];
-            temp=temp->next;
-        }
 
         return head;
+
+        
 
     }
 };
